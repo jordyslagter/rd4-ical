@@ -10,6 +10,7 @@ jobs:
 
     env:
       CREATE_CLOUDFLARE_TELEMETRY_DISABLED: 1
+      WRANGLER_SEND_METRICS: false
 
     timeout-minutes: 60
 
