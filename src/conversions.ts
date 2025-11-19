@@ -33,7 +33,7 @@ export const convertStringDate = (dateStr: string): Date | null => {
 export const garbagePickupEventsToIcal = (
   garbagePickupEvents: Iterable<GarbagePickupEvent>,
 ) => {
-  const calendar = ical({ name: "Afvalkalendar" });
+  const calendar = ical({ name: "Afvalkalender" });
 
   for (const garbagePickupEvent of garbagePickupEvents) {
     calendar.createEvent({
