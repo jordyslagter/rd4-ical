@@ -30,30 +30,13 @@ export const convertStringDate = (dateStr: string): Date | null => {
   return new Date(Date.UTC(year, month, day));
 };
 
-// we need to generate a deterministic id for events to make sure calendars
-// don't refresh unnecesarily
-const makeId = async (event: GarbagePickupEvent) => {
-  const data = new TextEncoder().encode(`${event.date}:${event.garbageType}`);
-
-  const hashBuffer = await crypto.subtle.digest("SHA-1", data);
-
-  return (
-    [...new Uint8Array(hashBuffer)]
-      .map((x) => x.toString(16).padStart(2, "0"))
-      .join("") + "@afvalkalender"
-  );
-};
-
-export const garbagePickupEventsToIcal = async (
+export const garbagePickupEventsToIcal = (
   garbagePickupEvents: Iterable<GarbagePickupEvent>,
 ) => {
   const calendar = ical({ name: "Afvalkalender" });
 
   for (const garbagePickupEvent of garbagePickupEvents) {
-    const id = await makeId(garbagePickupEvent);
-
     calendar.createEvent({
-      id,
       start: new Date(garbagePickupEvent.date),
       allDay: true,
       summary: garbagePickupEvent.garbageType,
