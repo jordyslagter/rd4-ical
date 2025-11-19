@@ -2,7 +2,7 @@ import { garbagePickupEventsToIcal } from "./conversions";
 import { parseCalendarHTML } from "./parsing";
 
 export default {
-  async fetch(request, env, ctx): Promise<Response> {
+  async fetch(request, _, __): Promise<Response> {
     const url = new URL(request.url);
 
     const postalCode = url.searchParams.get("pc");
