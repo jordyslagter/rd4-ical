@@ -1,5 +1,6 @@
 import ical from "ical-generator";
 import { GarbagePickupEvent } from "./types";
+import { v5 as uuid } from "uuid";
 
 const dutchMonthMap: Record<string, number> = Object.freeze({
   januari: 0,
@@ -30,25 +31,18 @@ export const convertStringDate = (dateStr: string): Date | null => {
   return new Date(Date.UTC(year, month, day));
 };
 
-// we need to generate a deterministic id for events to make sure calendars
-// don't refresh unnecesarily
-const makeId = async (event: GarbagePickupEvent) => {
-  const data = new TextEncoder().encode(`${event.date}:${event.garbageType}`);
+const RD4_ICAL_NAMESPACE = "123e4567-e89b-12d3-a456-426614174000";
 
-  const hashBuffer = await crypto.subtle.digest("SHA-1", data);
-
-  return [...new Uint8Array(hashBuffer)]
-    .map((x) => x.toString(16).padStart(2, "0"))
-    .join("");
-};
-
-export const garbagePickupEventsToIcal = async (
+export const garbagePickupEventsToIcal = (
   garbagePickupEvents: Iterable<GarbagePickupEvent>,
 ) => {
   const calendar = ical({ name: "Afvalkalender" });
 
   for (const garbagePickupEvent of garbagePickupEvents) {
-    const id = await makeId(garbagePickupEvent);
+    const id = uuid(
+      `${garbagePickupEvent.date}:${garbagePickupEvent.garbageType}`,
+      RD4_ICAL_NAMESPACE,
+    );
 
     calendar.createEvent({
       id,

@@ -28,7 +28,7 @@ export default {
 
     const events = parseCalendarHTML(html);
 
-    const ical = await garbagePickupEventsToIcal(events);
+    const ical = garbagePickupEventsToIcal(events);
     const icalText = ical.toString();
 
     // Return as response
