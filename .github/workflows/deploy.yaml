@@ -1,4 +1,5 @@
 name: Deploy Worker
+
 on:
   push:
     branches:
@@ -6,7 +7,12 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
+    env:
+      CREATE_CLOUDFLARE_TELEMETRY_DISABLED: 1
+
     timeout-minutes: 60
+
     steps:
       - uses: actions/checkout@v4
 
