@@ -12,7 +12,7 @@ export default {
 
     if (!postalCode && !houseNumber) {
       return new Response(
-        "You need to specify a postal code using &pc= and a house number " +
+        "You need to specify a postal code using ?pc= and a house number " +
           "using &nr=",
         {
           status: 400,
