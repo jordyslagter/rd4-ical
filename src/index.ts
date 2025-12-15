@@ -10,6 +10,15 @@ export default {
     // ex: Teststraat 4F <-- the F here is the addition
     const houseNumberAddition = url.searchParams.get("t");
 
+    if (!postalCode && !houseNumber) {
+      return new Response(
+        "You need to specify a postal code using &pc= and a house number " +
+          "using &nr=",
+        {
+          status: 400,
+        },
+      );
+    }
     if (!postalCode)
       return new Response("You need to specify a postal code using ?pc=", {
         status: 400,
