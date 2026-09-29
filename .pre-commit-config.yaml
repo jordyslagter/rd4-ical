@@ -1,10 +1,10 @@
 # Copyright 2026 Jordy Slagter
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache NON-AI License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+# https://raw.githubusercontent.com/non-ai-licenses/non-ai-licenses/refs/heads/main/NON-AI-APACHE2
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,4 +17,4 @@ repos:
     rev: v1.2.0
     hooks:
       - id: addlicense
-        args: ["-c", "Jordy Slagter", "-l", "apache"]
+        args: ["-f", "license_header.txt"]
